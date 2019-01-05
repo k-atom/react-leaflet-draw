@@ -1,85 +1,41 @@
-# React-Leaflet-Draw
+# Fork of React-Leaflet-Draw
 
-React component build on top of [React-Leaflet](https://github.com/PaulLeCam/react-leaflet) that integrate [leaflet-draw](https://github.com/Leaflet/Leaflet.draw) feature.
+This is a fork of [React-Leaflet-Draw](https://github.com/alex3165/react-leaflet-draw), a component that wraps [leaflet-draw](https://github.com/Leaflet/Leaflet.draw) in order to work with [React-Leaflet](https://github.com/PaulLeCam/react-leaflet).
+
+This fork is mainly to provide an alternative [MapControl](https://react-leaflet.js.org/docs/en/components.html#mapcontrol) component that more plainly wraps the Leafet.draw control and does not provide its own internal [FeatureGroup](https://react-leaflet.js.org/docs/en/components.html#featuregroup). I implemented this, as the existing control did not work well with the redux store I was using for state. It also provides a component that has its own internal FeatureGroup for convenience.
+
+This repo will not be maintained (I really don't have the time). I provide it as a convenience and as a guide.
+
+**NB:** If the original repo wants to incorporate these changes, that's fine by me, but I think that given the tradeoff between the size of this code and the potential to break the existing client code it is probably easier to just copy-paste this code if you need it (or use the `@andrewdodd/react-leaflet-draw` dep instead).
 
 ## Install
 
 ```
-npm install react-leaflet-draw
+npm install @andrewdodd/react-leaflet-draw
 ```
 
 ## Getting started
 
 First, include leaflet-draw styles in your project
+
 ```html
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.3/leaflet.draw.css"/>
 ```
+
 or by including
+
 ```
 node_modules/leaflet-draw/dist/leaflet.draw.css
 ```
+or perhaps forcing the css to be included (this one is for my own benefit, in case I forget!)
 
-You might need to add one more rule missing in the current css:
-```css
-  .sr-only {
-    display: none;
-  }
+```
+import 'leaflet-draw/dist/leaflet.draw.css'
 ```
 
-It's important to wrap EditControl component into FeatureGroup component from `react-leaflet`.
-The elements you draw will be added to this FeatureGroup layer, when you hit edit button only items in this layer will be edited.
+As per the original React-Leaflet-Draw, it is important to wrap EditControl component in a FeatureGroup component from `react-leaflet`. However, interfacing to the EditControl component is complex enough that I have supplied a 'helper' container to do this. Have a look at the [example](https://github.com/andrewdodd/react-leaflet-draw/tree/master/example) for more info!
 
-```jsx
-import { Map, TileLayer, FeatureGroup, Circle } from 'react-leaflet';
-import { EditControl } from "react-leaflet-draw"
+NB: The code for this repo is not very long, so I would recommend reading it to get a better feel for what is happening. However, in summary:
 
-const Component = () => (
-  <FeatureGroup>
-    <EditControl
-      position='topright'
-      onEdited={this._onEditPath}
-      onCreated={this._onCreate}
-      onDeleted={this._onDeleted}
-      draw={{
-        rectangle: false
-      }}
-    />
-    <Circle center={[51.51, -0.06]} radius={200} />
-  </FeatureGroup>
-);
-```
-
-For more details on how to use this plugin check the [example](example/edit-control.js).
-
-You can pass more options on draw object, this informations can be found [here](https://github.com/Leaflet/Leaflet.draw#user-content-example-leafletdraw-config)
-
-## EditControl API
-
-#### Props
-
-|name            |type                        |description                                           |
-|----------------|----------------------------|------------------------------------------------------|
-|position        |string                      |control group position                                |
-|draw            |object <DrawOptions>        |enable/disable draw controls                          |
-|edit            |object <EditPolyOptions>    |enable/disable edit controls                          |
-|onEdited        |function                    |hook to leaflet-draw's `draw:edited` event            |
-|onCreated       |function                    |hook to leaflet-draw's `draw:created` event           |
-|onDeleted       |function                    |hook to leaflet-draw's `draw:deleted` event           |
-|onMounted       |function                    |hook to leaflet-draw's `draw:mounted` event           |
-|onEditStart     |function                    |hook to leaflet-draw's `draw:editstart` event         |
-|onEditStop      |function                    |hook to leaflet-draw's `draw:editstop` event          |
-|onDeleteStart   |function                    |hook to leaflet-draw's `draw:deletestart` event       |
-|onDeleteStop    |function                    |hook to leaflet-draw's `draw:deletestop` event        |
-|onDrawStart     |function                    |hook to leaflet-draw's `draw:drawstart` event         |
-|onDrawStop      |function                    |hook to leaflet-draw's `draw:drawstop` event          |
-|onDrawVertex    |function                    |hook to leaflet-draw's `draw:drawvertex` event        |
-|onEditMove      |function                    |hook to leaflet-draw's `draw:editmove` event          |
-|onEditResize    |function                    |hook to leaflet-draw's `draw:editresize` event          |
-|onEditVertex    |function                    |hook to leaflet-draw's `draw:editvertex` event          |
-
-#### Links to docs
-
-* [Control position options](http://leafletjs.com/reference.html#control-positions)
-* [DrawOptions](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#drawoptions)
-* [EditPolyOptions](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#editpolyoptions)
-* [Draw events](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#l-draw-event)
+ - [EditControl](https://github.com/andrewdodd/react-leaflet-draw/blob/master/src/EditControl.js) - Acts as a go-between (an adapter) for the "React" way and the underlying Leaflet/Leaflet.draw way. It creates and manages the MapControl, it registers and unregisters from the Leaflet.draw events.
+ - [EditControlFeatureGroup](https://github.com/andrewdodd/react-leaflet-draw/blob/master/src/FeatureGroup.js) - Combines both the necessary FeatureGroup and the LeafletDrawControl into a single component that manages the Leaflet.draw state changes, React-Leaflet child components and the underlying Leaflet.draw elements.
