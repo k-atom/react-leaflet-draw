@@ -14,7 +14,8 @@
     "prepublish": "npm run build",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "example": "webpack-dev-server --config ./example/webpack.config.js",
+    "example-full": "webpack-dev-server --config ./example-full/webpack.config.js",
+    "example-basic": "webpack-dev-server --config ./example-basic/webpack.config.js",
     "lint": "eslint ./src"
   },
   "repository": {

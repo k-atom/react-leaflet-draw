@@ -153,8 +153,20 @@ export default class EditControlExample extends Component {
     this.setState({ elementsById: newMap })
   }
 
-  _handleActivityStarted = e => console.log('started', e)
-  _handleActivityStopped = e => console.log('stopped', e)
+  _handleActivityStarted = e => {
+    console.log('started', e)
+    const { flagStartedEditing } = this.props
+    if (flagStartedEditing) {
+      flagStartedEditing()
+    }
+  }
+  _handleActivityStopped = e => {
+    console.log('stopped', e)
+    const { flagStoppedEditing } = this.props
+    if (flagStoppedEditing) {
+      flagStoppedEditing()
+    }
+  }
 
   render () {
     console.log('state', this.state)

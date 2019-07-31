@@ -39,3 +39,17 @@ NB: The code for this repo is not very long, so I would recommend reading it to 
 
  - [EditControl](https://github.com/andrewdodd/react-leaflet-draw/blob/master/src/EditControl.js) - Acts as a go-between (an adapter) for the "React" way and the underlying Leaflet/Leaflet.draw way. It creates and manages the MapControl, it registers and unregisters from the Leaflet.draw events.
  - [EditControlFeatureGroup](https://github.com/andrewdodd/react-leaflet-draw/blob/master/src/FeatureGroup.js) - Combines both the necessary FeatureGroup and the LeafletDrawControl into a single component that manages the Leaflet.draw state changes, React-Leaflet child components and the underlying Leaflet.draw elements.
+
+## Running the examples
+
+There are a few examples in the repo, which show the various levels of complexity you need to deal with (and why this plugin is the way it is).
+
+ 1. Basic example - this just shows how to use the EditControlFeatureGroup in a map, but does not attempt to manage any state.
+  
+  * Run `npm run example-basic`
+  * And go to http://localhost:8000
+
+ 2. Full example - this shows how to manage the various events coming out of the EditControlFeatureGroup, how to update your application state, and how to pass configuration through to the underlying leaflet.draw plugin.
+
+  * Run `npm run example-full`
+  * And go to http://localhost:8000
