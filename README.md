@@ -53,3 +53,8 @@ There are a few examples in the repo, which show the various levels of complexit
 
   * Run `npm run example-full`
   * And go to http://localhost:8000
+
+ 3. Custom example - this shows how to create an application that uses only programatically controlled functionality to manage the underlying leaflet.draw plugin. It does some pretty scary things, mainly because Leaflet and leaflet.draw are very DOM oriented, while React and React-Leavlet are not. I'm not really convinced that this is a good idea...but if you *have* to use Leaflet and leaflet.draw, and you *have* to use something other than the out-of-the-box controls I guess it is ok?
+
+  * Run `npm run example-custom`
+  * And go to http://localhost:8000

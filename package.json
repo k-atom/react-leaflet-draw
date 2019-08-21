@@ -1,6 +1,6 @@
 {
   "name": "@andrewdodd/react-leaflet-draw",
-  "version": "0.19.0",
+  "version": "0.19.1",
   "description": "React component for leaflet-draw",
   "main": "dist/react-leaflet-draw.js",
   "module": "dist/esm/index.js",
@@ -16,6 +16,7 @@
     "postversion": "git push && git push --tags",
     "example-full": "webpack-dev-server --config ./example-full/webpack.config.js",
     "example-basic": "webpack-dev-server --config ./example-basic/webpack.config.js",
+    "example-custom": "webpack-dev-server --config ./example-custom/webpack.config.js",
     "lint": "eslint ./src"
   },
   "repository": {

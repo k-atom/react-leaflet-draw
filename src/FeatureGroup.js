@@ -24,6 +24,8 @@ export default class EditControlFeatureGroup extends Component {
 
   constructor () {
     super()
+    this._featureGroupRef = React.createRef()
+    this._editControlRef = React.createRef()
     this._createStoreRef = this._createStoreRef.bind(this)
 
     this._onCreated = this._onCreated.bind(this)
@@ -84,7 +86,7 @@ export default class EditControlFeatureGroup extends Component {
   render () {
     const { controlProps } = this.props
     return (
-      <FeatureGroup>
+      <FeatureGroup ref={this._featureGroupRef}>
         <LeafletDrawControl
           {...controlProps}
           onDeleted={this._onDeleted}
@@ -96,6 +98,7 @@ export default class EditControlFeatureGroup extends Component {
           onDrawStop={this._onActivityStopped}
           onEditStop={this._onActivityStopped}
           onDeleteStop={this._onActivityStopped}
+          ref={this._editControlRef}
         />
         {React.Children.map(this.props.children, child => {
           return React.cloneElement(child, {
