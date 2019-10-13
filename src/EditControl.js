@@ -71,7 +71,7 @@ class EditControl extends MapControl {
     })
   }
 
-  componentWillMount () {
+  componentDidMount () {
     const { map } = this.props.leaflet
     // register all event handlers for leaflet-draw
     for (const key in eventHandlers) {
@@ -79,9 +79,7 @@ class EditControl extends MapControl {
         map.on(eventHandlers[key], this.props[key], this)
       }
     }
-  }
 
-  componentDidMount () {
     const { onMounted } = this.props
     super.componentDidMount()
     onMounted && onMounted(this.leafletElement)
