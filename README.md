@@ -8,7 +8,7 @@ This fork is mainly to provide an alternative [MapControl](https://react-leaflet
 ## Install
 
 ```
-npm i -D @kanon75505601/react-leaflet-draw
+npm i -D @k-atom/react-leaflet-draw
 ```
 
 ## Getting started
@@ -30,12 +30,12 @@ or perhaps forcing the css to be included (this one is for my own benefit, in ca
 import 'leaflet-draw/dist/leaflet.draw.css'
 ```
 
-As per the original React-Leaflet-Draw, it is important to wrap EditControl component in a FeatureGroup component from `react-leaflet`. However, interfacing to the EditControl component is complex enough that I have supplied a 'helper' container to do this. Have a look at the [example](https://github.com/kanon75505601/react-leaflet-draw/tree/master/example-full) for more info!
+As per the original React-Leaflet-Draw, it is important to wrap EditControl component in a FeatureGroup component from `react-leaflet`. However, interfacing to the EditControl component is complex enough that I have supplied a 'helper' container to do this. Have a look at the [example](https://github.com/k-atom/react-leaflet-draw/tree/master/example-full) for more info!
 
 NB: The code for this repo is not very long, so I would recommend reading it to get a better feel for what is happening. However, in summary:
 
- - [EditControl](https://github.com/kanon75505601/react-leaflet-draw/blob/master/src/EditControl.js) - Acts as a go-between (an adapter) for the "React" way and the underlying Leaflet/Leaflet.draw way. It creates and manages the MapControl, it registers and unregisters from the Leaflet.draw events.
- - [EditControlFeatureGroup](https://github.com/kanon75505601/react-leaflet-draw/blob/master/src/FeatureGroup.js) - Combines both the necessary FeatureGroup and the LeafletDrawControl into a single component that manages the Leaflet.draw state changes, React-Leaflet child components and the underlying Leaflet.draw elements.
+ - [EditControl](https://github.com/k-atom/react-leaflet-draw/blob/master/src/EditControl.js) - Acts as a go-between (an adapter) for the "React" way and the underlying Leaflet/Leaflet.draw way. It creates and manages the MapControl, it registers and unregisters from the Leaflet.draw events.
+ - [EditControlFeatureGroup](https://github.com/k-atom/react-leaflet-draw/blob/master/src/FeatureGroup.js) - Combines both the necessary FeatureGroup and the LeafletDrawControl into a single component that manages the Leaflet.draw state changes, React-Leaflet child components and the underlying Leaflet.draw elements.
 
 ## Running the examples
 
